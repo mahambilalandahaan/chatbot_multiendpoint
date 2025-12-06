@@ -15,12 +15,36 @@ from dotenv import load_dotenv
 import os
 from fastapi.middleware.cors import CORSMiddleware
 
+import uvicorn
+
+app = FastAPI()
+
+@app.get("/")
+def home():
+    return {"message": "Hello, Render!"}
+
+if __name__ == "__main__":
+    # Render assigns a dynamic port via environment variable
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
+
 load_dotenv()
 api_key = os.getenv("API_KEY")
 if not api_key:
     raise ValueError("API_KEY not set in environment variables!")
 
 app = FastAPI()
+
+@app.get("/")
+def home():
+    return {"message": "Hello, Render!"}
+
+if __name__ == "__main__":
+    # Render assigns a dynamic port via environment variable
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
+
+
 base_url = "https://openrouter.ai/api/v1"
 client = OpenAI(base_url=base_url, api_key=api_key)
 
