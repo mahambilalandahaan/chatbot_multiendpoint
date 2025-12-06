@@ -117,11 +117,6 @@ async def get_reply_length():
 async def reset_history():
     return {"history": []}
 
-# ---------------- Root endpoint ----------------
-@app.get("/")
-def home():
-    return {"message": "Hello, Render!"}
-
 # ---------------- Run app ----------------
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
